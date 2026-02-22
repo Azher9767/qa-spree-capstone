@@ -77,3 +77,5 @@ group :development, :test do
   gem "letter_opener"
   gem "listen"
 end
+
+gem "spree_stripe", "~> 1.5"
