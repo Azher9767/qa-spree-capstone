@@ -61,8 +61,28 @@ Manual testing was performed on the core user journeys of the application:
 
 ---
 
+## Cross-Browser Testing
+
+Cross-browser testing was performed to validate UI rendering and functional behavior across major modern browsers.
+
+| Browser | Version | Result | Observations |
+|----------|----------|---------|--------------|
+| Google Chrome | Latest | Pass | All flows executed successfully |
+| Mozilla Firefox | Latest | Pass | No layout or functional issues observed |
+| Microsoft Edge | Latest | Pass | Application behavior consistent |
+
+### Responsiveness Check
+
+Responsive testing was performed using browser developer tools.
+
+| Device Type | Result | Observations |
+|-------------|--------|--------------|
+| Mobile View | Pass | Layout adjusted correctly |
+| Tablet View | Pass | Navigation and UI elements aligned properly |
+
 ## Conclusion
 
-Manual execution of all critical e-commerce workflows was completed successfully.  
-No defects (critical, major, or minor) were identified during testing.  
-The application is stable and ready for automated, performance, and cross-browser validation.
+Manual testing of all critical e-commerce workflows was completed successfully.  
+Cross-browser compatibility and responsive behavior were verified across major modern browsers.  
+No functional, UI, or compatibility defects (critical, major, or minor) were identified during testing.  
+The application is stable and suitable for production-level validation, including automated and performance testing.
