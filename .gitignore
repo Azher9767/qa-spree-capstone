@@ -33,3 +33,19 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# Node modules
+/node_modules/
+
+# NPM/Yarn debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cypress cache
+.cypress-cache/
+
+# Optional: coverage reports
+/coverage/
+
+# Optional: local env files for node
+.env.local
