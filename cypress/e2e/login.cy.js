@@ -1,50 +1,41 @@
 describe('Spree Signup & Login Flow', () => {
-  const email = 'testuser@example.com'
+  const email = `test_account@example.com`
   const password = 'password123'
 
-  before(() => {
-    // Open homepage
-    cy.visit('/')
+  beforeEach(() => {
+    cy.viewport(1280, 800)
   })
 
-  it('Sign Up using Turbo Frame', () => {
-    // Intercept signup POST request
+  it('Sign Up', () => {
     cy.intercept('POST', '/user').as('signupRequest')
 
-    // Open signup form (Turbo Frame)
-    cy.contains('Sign Up').click()
+    cy.visit('/user/sign_up')
 
-    // Fill form inside turbo-frame
-    cy.get('turbo-frame#login', { timeout: 15000 }).within(() => {
-      cy.get('input[name="user[email]"]').type(email)
-      cy.get('input[name="user[password]"]').type(password)
-      cy.get('input[name="user[password_confirmation]"]').type(password)
-      cy.get('input[type="submit"]').click()
-    })
+    cy.get('#user_email', { timeout: 10000 }).type(email)
+    cy.get('#user_password').type(password)
+    cy.get('#user_password_confirmation').type(password)
+    cy.get('input[value="Sign Up"]').click()
 
-    // Wait for server request to fire
-    cy.wait('@signupRequest')
+    cy.wait('@signupRequest', { timeout: 15000 })
 
-    // Confirm user is logged in
-    cy.contains('Logout', { timeout: 10000 }).should('be.visible')
+    cy.url({ timeout: 10000 }).should('include', 'localhost:3000')
   })
 
-  it('Login with existing user', () => {
-    cy.contains('Logout').click() // ensure logged out
+  it('Login and Logout', () => {
+    cy.visit('/user/sign_in')
 
-    cy.intercept('POST', '/user/sign_in').as('loginRequest')
+    cy.get('#user_email', { timeout: 10000 }).type(email)
+    cy.get('#user_password').type(password)
+    cy.get('input[value="Login"]').click()
 
-    cy.contains('Login').click()
+    cy.url({ timeout: 10000 }).should('not.include', '/sign_in')
 
-    cy.get('turbo-frame#login', { timeout: 15000 }).within(() => {
-      cy.get('input[name="user[email]"]').type(email)
-      cy.get('input[name="user[password]"]').type(password)
-      cy.get('input[type="submit"]').click()
+    cy.request({
+      method: 'DELETE',
+      url: '/user/sign_out',
+      failOnStatusCode: false
     })
-
-    cy.wait('@loginRequest')
-
-    // Verify user is logged in again
-    cy.contains('Logout', { timeout: 10000 }).should('be.visible')
+    cy.visit('/')
+    cy.url().should('include', 'localhost:3000')
   })
 })

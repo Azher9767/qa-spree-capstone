@@ -18,6 +18,6 @@ describe('Spree Admin Login', () => {
 
     cy.wait('@adminLogin')
     cy.url().should('include', '/admin')
-    cy.contains('Dashboard').should('be.visible')
+    cy.contains('Home').should('be.visible')
   })
 })
