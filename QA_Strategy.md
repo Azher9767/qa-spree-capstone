@@ -118,3 +118,13 @@ We will validate all core functionalities across web, mobile, and API platforms.
 
 ## 9. Approval
 Prepared for Spree E-commerce Capstone Project. Ready for execution of manual and automated tests as per Capstone Part 1 requirements.
+
+---
+
+## Performance Testing (Automated)
+
+Basic performance validation was implemented using Cypress.
+
+- Homepage load time validation
+- Threshold-based assertion (3 seconds max)
+- Optional Lighthouse performance audit

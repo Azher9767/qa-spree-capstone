@@ -82,7 +82,8 @@ Responsive testing was performed using browser developer tools.
 
 ## Conclusion
 
-Manual testing of all critical e-commerce workflows was completed successfully.  
+Manual testing of all critical e-commerce workflows was completed successfully.
+No functional defects were identified during manual execution, therefore no defect tracking was required.
 Cross-browser compatibility and responsive behavior were verified across major modern browsers.  
 No functional, UI, or compatibility defects (critical, major, or minor) were identified during testing.  
 The application is stable and suitable for production-level validation, including automated and performance testing.
