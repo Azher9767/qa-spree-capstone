@@ -49,3 +49,21 @@ yarn-error.log*
 
 # Optional: local env files for node
 .env.local
+
+# Ignore everything in node_modules anywhere
+**/node_modules/
+
+# Ignore all WDIO/Appium temp folders inside mobile-tests
+mobile-tests/.wdio/
+mobile-tests/reports/
+mobile-tests/screenshots/
+mobile-tests/videos/
+
+# Android SDK / Emulator temp files
+**/*.iml
+**/.idea/
+**/build/
+**/.gradle/
+**/local.properties
+
+**/target/
