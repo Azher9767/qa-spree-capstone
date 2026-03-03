@@ -1,0 +1,7 @@
+<suite name="MobileSuite">
+    <test name="LoginTest">
+        <classes>
+            <class name="com.spree.mobile.LoginTest"/>
+        </classes>
+    </test>
+</suite>
