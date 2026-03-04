@@ -8,12 +8,11 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @Test
-    public void userCanLogin() {
+  @Test
+    public void userCanLoginAndLogout() {
 
         driver.get("http://10.0.2.2:3000/user/sign_in");
 
-        // Wait for email and password fields
         WebElement emailField = wait.until(
             ExpectedConditions.visibilityOfElementLocated(By.id("user_email"))
         );
@@ -24,20 +23,34 @@ public class LoginTest extends BaseTest {
         );
         passwordField.sendKeys("password123");
 
-        // Click login button
         WebElement loginButton = wait.until(
             ExpectedConditions.elementToBeClickable(By.id("login-button"))
         );
         loginButton.click();
 
-        // Wait for URL to change as login success
+        // Wait until we are redirected away from login page
         wait.until(ExpectedConditions.not(
-            ExpectedConditions.urlContains("/user/sign_in")
+            ExpectedConditions.urlContains("sign_in")
         ));
 
-        // Optional: check Logout text inside turbo frame
-        WebElement turboFrame = driver.findElement(By.id("login")); // frame container
-        boolean isLoggedIn = turboFrame.getText().contains("Logout");
-        Assert.assertTrue(isLoggedIn, "User login failed!");
+        // Click hamburger menu
+        WebElement menuButton = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.cssSelector("button[data-toggle-menu-target='button']")
+            )
+        );
+        menuButton.click();
+
+        // Click Sign out
+        WebElement signOutLink = wait.until(
+            ExpectedConditions.elementToBeClickable(By.linkText("Sign out"))
+        );
+        signOutLink.click();
+
+        // Verify login page appears again
+        WebElement loginPageCheck = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(By.id("user_email"))
+        );
+        Assert.assertTrue(loginPageCheck.isDisplayed(), "Logout failed!");
     }
 }
