@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Checkout Repository
       uses: actions/checkout@v3
 
@@ -20,15 +21,39 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 18.16.0
+        cache: 'npm'
 
-    - name: Install Cypress Dependencies
+    - name: Install Node Dependencies
+      run: npm install
+
+    # ----------------------------
+    # Setup Ruby for Spree
+    # ----------------------------
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+
+    - name: Install Gems
+      run: bundle install
+
+    - name: Setup Database
       run: |
-        npm install
+        bundle exec rails db:create
+        bundle exec rails db:migrate
 
+    - name: Start Spree Server
+      run: |
+        bundle exec rails server -d -p 3000
+        sleep 20
+
+    # ----------------------------
+    # Run Cypress Tests
+    # ----------------------------
     - name: Run Cypress Tests
-      run: |
-        npx cypress run
+      run: npx cypress run --browser chrome --headless
 
     # ----------------------------
     # Setup Java for Selenium
@@ -36,10 +61,11 @@ jobs:
     - name: Setup Java
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
-        java-version: '17'
+        distribution: temurin
+        java-version: 17
 
-    - name: Build and Run Selenium Tests
+    - name: Run Selenium Tests
       run: |
         cd mobile-test
-        mvn clean test
+        mvn -B clean test
+        
