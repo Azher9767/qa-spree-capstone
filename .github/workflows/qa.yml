@@ -68,3 +68,4 @@ jobs:
       run: |
         cd mobile-test
         mvn -B clean test
+        
