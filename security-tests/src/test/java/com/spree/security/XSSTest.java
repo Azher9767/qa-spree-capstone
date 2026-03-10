@@ -44,7 +44,6 @@ public class XSSTest extends BaseTest {
                     alertPresent = true;
                     alert.dismiss();
                 } catch (Exception e) {
-                    // No alert = good
                 }
 
                 Assert.assertFalse(alertPresent,
@@ -75,7 +74,6 @@ public class XSSTest extends BaseTest {
                     alertPresent = true;
                     alert.dismiss();
                 } catch (Exception e) {
-                    // Good - no XSS
                 }
 
                 Assert.assertFalse(alertPresent,

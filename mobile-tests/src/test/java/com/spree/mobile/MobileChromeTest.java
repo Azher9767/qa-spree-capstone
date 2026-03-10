@@ -13,7 +13,7 @@ public class MobileChromeTest {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
-        caps.setCapability("automationName", "UiAutomator2");  // 👈 IMPORTANT
+        caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("deviceName", "emulator-5554");
         caps.setCapability("browserName", "Chrome");
 

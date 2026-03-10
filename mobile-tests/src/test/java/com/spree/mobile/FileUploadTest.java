@@ -49,7 +49,7 @@ public class FileUploadTest extends BaseTest {
         Thread.sleep(2000);
         System.out.println("Upload area clicked, Uppy modal opening...");
 
-        // Step 6: Uppy modal ka input - aria-hidden hata ke visible karo
+        // Step 6: Uppy modal area hidden now visible
         WebElement uppyInput = wait.until(
             ExpectedConditions.presenceOfElementLocated(By.cssSelector("input.uppy-Dashboard-input"))
         );
@@ -64,12 +64,12 @@ public class FileUploadTest extends BaseTest {
         );
         Thread.sleep(500);
 
-        // Step 7: File send karo
+        // Step 7: File send
         uppyInput.sendKeys(uploadFile.getAbsolutePath());
         Thread.sleep(3000);
         System.out.println("File sent to Uppy input");
 
-        // Step 8: Uppy upload button click karo (agar aaya to)
+        // Step 8: click Uppy upload button 
         try {
             WebElement uploadBtn = driver.findElement(
                 By.cssSelector(".uppy-StatusBar-actionBtn--upload")
@@ -81,7 +81,7 @@ public class FileUploadTest extends BaseTest {
             System.out.println("Uppy upload btn nahi mila, continue: " + e.getMessage());
         }
 
-        // Step 9: Form submit karo
+        // Step 9: Form submit
         WebElement updateBtn = wait.until(
             ExpectedConditions.presenceOfElementLocated(By.cssSelector("button[data-admin-target='save']"))
         );

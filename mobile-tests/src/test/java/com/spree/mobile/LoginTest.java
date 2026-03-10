@@ -45,7 +45,7 @@ public class LoginTest extends BaseTest {
         );
         menuButton.click();
 
-        // Wait for menu to fully load (turbo stream settle hone do)
+        // Wait for menu to fully load (lets settle turbo stream)
         Thread.sleep(2000);
 
         // Sign out - xpath with contains to handle whitespace
@@ -55,7 +55,7 @@ public class LoginTest extends BaseTest {
             )
         );
 
-        // JavaScript click use karo (turbo-method wala link hai)
+        // use JavaScript click becuase it turbo stream link (dynamic)
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", signOutLink);
 
         // Wait for redirect back to home page page
