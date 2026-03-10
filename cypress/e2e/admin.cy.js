@@ -1,6 +1,6 @@
 describe('Spree Admin Login', () => {
   const adminEmail = 'spree@example.com'
-  const adminPassword = 'spree123'
+  const adminPassword = 'Spree@Test123!'
 
   it('Admin can log in successfully', () => {
     cy.visit('/admin')
