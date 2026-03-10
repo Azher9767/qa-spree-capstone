@@ -1,5 +1,8 @@
 
 ---
+# QA Strategy - Spree E-commerce Capstone Project
+## Part 1 + Part 2 Combined Strategy
+---
 
 ## 1. Test Plan
 
@@ -31,12 +34,20 @@ We will validate all core functionalities across web, mobile, and API platforms.
 - Page load time under normal and peak loads
 - API response time
 - Stress testing: simulate multiple users performing checkout simultaneously
+- Load testing using **Apache JMeter** (10 users, normal traffic)
+- Stress testing using **Apache JMeter** (50 users, beyond normal traffic)
+- Pages tested: Home, Products, Search, Login, Cart
 
 ### 1.3 Security Testing
 - Authentication and authorization enforcement
 - Access control to admin functionalities
 - Input validation: SQL injection, XSS, CSRF
 - Session management and password security
+- Automated security tests using **Selenium WebDriver (Java)**:
+  - SQL Injection on login and search fields
+  - XSS on login form and search
+  - Authentication security (admin access, brute force, session invalidation)
+  - Sensitive data exposure (password masking, stack trace, page source)
 
 ---
 
@@ -56,15 +67,19 @@ We will validate all core functionalities across web, mobile, and API platforms.
 - Validate cross-browser and mobile responsiveness.
 - Verify APIs return correct and secure data.
 - Identify defects early and report them with suggested solutions.
+- Validate application security against common vulnerabilities.
+- Measure application performance under load and stress conditions.
 
 ---
 
 ## 4. Test Scope
 **Included:**
 - Web platform (desktop browsers)
-- Mobile platform (responsive testing)
+- Mobile platform (responsive testing via Appium + Chrome)
 - Backend API endpoints
 - Core e-commerce flows: registration, product search, checkout, admin tasks
+- Security testing: SQL injection, XSS, authentication, sensitive data
+- Performance testing: load and stress via JMeter
 
 **Excluded:**
 - External payment gateway live transactions
@@ -73,12 +88,15 @@ We will validate all core functionalities across web, mobile, and API platforms.
 ---
 
 ## 5. Resource Planning
-- **Tester/Developer:** [Your Name]  
-- **Tools:**  
-  - Manual Testing: Browser DevTools, Postman  
-  - Automated Testing: Cypress, Cypress plugins (performance, accessibility)  
-  - Issue Tracking: Jira  
-- **Environment:** Local Rails server for web & API, mobile responsive mode, optional device emulators
+- **Tester/Developer:** Rafiullah
+- **Tools:**
+  - Manual Testing: Browser DevTools, Postman
+  - Automated Testing: Cypress, Selenium WebDriver (Java), Appium
+  - Performance Testing: Apache JMeter
+  - Security Testing: Selenium WebDriver (Java)
+  - CI/CD: GitHub Actions
+  - Issue Tracking: Jira
+- **Environment:** Local Rails server for web & API, mobile responsive mode, Android emulator
 
 ---
 
@@ -86,9 +104,10 @@ We will validate all core functionalities across web, mobile, and API platforms.
 | Environment | Details |
 |-------------|---------|
 | Web | Chrome (latest), Firefox (latest), Safari (latest) |
-| Mobile | Chrome mobile, Firefox mobile, Safari mobile; responsive mode + emulator |
-| API | Local Rails endpoints (/api/v1/*) |
-| Automation | Cypress framework with integration for web and API tests |
+| Mobile | Chrome mobile via Appium, Android emulator (Pixel 6) |
+| API | Local Rails endpoints (/api/v2/*) |
+| Automation | Cypress (web), Selenium WebDriver Java (desktop + security), Appium (mobile) |
+| Performance | Apache JMeter against local Spree server |
 
 ---
 
@@ -98,11 +117,14 @@ We will validate all core functionalities across web, mobile, and API platforms.
 | QA Strategy & Test Plan | 1 day |
 | Manual Test Case Creation | 2 days |
 | Manual Testing Execution | 2 days |
-| Automated Testing Setup | 1 day |
-| Automated Test Execution | 2 days |
-| Performance & Accessibility Checks | 1 day |
+| Automated Testing Setup (Cypress) | 1 day |
+| Automated Test Execution (Cypress) | 2 days |
+| Mobile Testing (Appium) | 2 days |
+| Security Testing (Selenium) | 1 day |
+| Performance Testing (JMeter) | 1 day |
+| CI/CD Pipeline Setup | 1 day |
 | Reporting & Documentation | 1 day |
-| **Total Duration** | ~10 days |
+| **Total Duration** | ~14 days |
 
 ---
 
@@ -110,6 +132,9 @@ We will validate all core functionalities across web, mobile, and API platforms.
 - QA_Strategy.md (this document)
 - Manual_Test_Cases.md
 - Cypress automated tests for web + API
+- Selenium WebDriver tests (mobile + security)
+- Apache JMeter performance test configurations
+- CI/CD pipeline (GitHub Actions)
 - Test execution results & screenshots
 - Defect reports logged in Jira
 - Performance and accessibility reports
@@ -117,14 +142,20 @@ We will validate all core functionalities across web, mobile, and API platforms.
 ---
 
 ## 9. Approval
-Prepared for Spree E-commerce Capstone Project. Ready for execution of manual and automated tests as per Capstone Part 1 requirements.
+Prepared for Spree E-commerce Capstone Project. Covers both Part 1 (manual + Cypress) and Part 2 (Appium, Selenium, JMeter, Security, CI/CD) requirements.
 
 ---
 
 ## Performance Testing (Automated)
 
-Basic performance validation was implemented using Cypress.
+Basic performance validation was implemented using Cypress and Apache JMeter.
 
+**Cypress:**
 - Homepage load time validation
 - Threshold-based assertion (3 seconds max)
 - Optional Lighthouse performance audit
+
+**JMeter:**
+- Load test: 10 concurrent users, 5 loops, 30s ramp-up
+- Stress test: 50 concurrent users, 10 loops, 60s ramp-up
+- Results saved as `.jtl` files for reporting

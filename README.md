@@ -273,3 +273,10 @@ No observable vulnerabilities during functional validation.
 | GitHub Documentation                        | ✅ Completed           |
 
 ---
+
+---
+
+# Part 2 – Advanced Automation & Integration
+
+For Part 2 deliverables (Mobile Testing, Selenium, CI/CD Pipeline):
+See [`mobile-test/README.md`](./mobile-test/README.md)
