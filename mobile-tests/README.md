@@ -5,7 +5,7 @@
 This repository contains the **Part 2 implementation of the QA Capstone Project**, focusing on advanced test automation, mobile testing strategies, and CI/CD integration for an e-commerce platform.
 
 The application under test is **Spree Commerce**, which was configured and manually tested in **Part 1**.
-Part 2 extends the testing coverage by introducing **mobile testing workflows, Selenium automation, parallel execution strategies, and CI/CD pipeline integration**.
+Part 2 extends the testing coverage by introducing **mobile testing workflows, Selenium automation, parallel execution strategies, CI/CD pipeline integration, and security testing**.
 
 ---
 
@@ -17,6 +17,7 @@ The goal of this phase is to extend the QA foundation established in Part 1 by i
 * Automating complex workflows using Selenium WebDriver
 * Executing tests across different environments
 * Integrating automated tests into a CI/CD pipeline
+* Validating application security through automated security tests
 
 The project demonstrates how automated testing can improve product quality, reduce manual effort, and ensure reliability across multiple environments.
 
@@ -99,6 +100,7 @@ Automation scenarios include:
 * Product navigation
 * Add to cart workflow
 * Checkout flow
+* File upload
 
 Tests are written in **Java using Selenium WebDriver and TestNG**.
 
@@ -128,6 +130,30 @@ parallel-execution.md
 
 ---
 
+# Security Testing
+
+Security testing is performed using **Selenium WebDriver (Java)** to validate that the Spree application is protected against common web vulnerabilities.
+
+Security tests are located in a dedicated `security-tests/` folder at the project root, separate from mobile tests.
+
+### What is tested and why
+
+| Test | Purpose |
+| ---- | ------- |
+| SQL Injection | Ensures login and search fields do not expose database errors or allow unauthorized access when malicious SQL is entered |
+| XSS (Cross-Site Scripting) | Verifies that user input is properly escaped and malicious scripts cannot be executed in the browser |
+| Authentication Security | Checks that admin and account pages are inaccessible without login, multiple failed logins are handled correctly, and sessions are properly invalidated after logout |
+| Sensitive Data Exposure | Confirms that password fields are masked, error pages do not reveal stack traces, and sensitive keys are not exposed in page source |
+
+### Running security tests
+
+```bash
+cd security-tests
+mvn test
+```
+
+---
+
 # CI/CD Integration
 
 Automated tests are integrated into a **CI/CD pipeline using GitHub Actions**.
@@ -151,22 +177,36 @@ cicd-integration.md
 # Project Structure
 
 ```
-mobile-tests
+spree/
 │
-├── device-matrix.md
-├── network-testing.md
-├── selenium-automation.md
-├── parallel-execution.md
-├── cicd-integration.md
-├── README.md
+├── mobile-tests/
+│   ├── device-matrix.md
+│   ├── network-testing.md
+│   ├── selenium-automation.md
+│   ├── parallel-execution.md
+│   ├── cicd-integration.md
+│   ├── README.md
+│   │
+│   ├── selenium-tests/
+|   ├─  ├── BaseTest.java
+│   │   ├── LoginTest.java
+│   │   ├── ProductSearchTest.java
+│   │   ├── AddToCartTest.java
+│   │   ├── CheckoutFormTest.java
+│   │   └── FileUploadTest.java
+│   │
+│   └── test-config/
+│       └── testng.xml
 │
-├── selenium-tests
-│   ├── LoginTest.java
-│   ├── ProductSearchTest.java
-│   ├── AddToCartTest.java
-│
-└── test-config
-    └── testng.xml
+└── security-tests/
+    ├── pom.xml
+    ├── testng.xml
+    └── src/test/java/com/spree/security/
+        ├── BaseTest.java
+        ├── SQLInjectionTest.java
+        ├── XSSTest.java
+        ├── AuthSecurityTest.java
+        └── SensitiveDataTest.java
 ```
 
 ---
@@ -408,6 +448,25 @@ mvn clean test -DsuiteXmlFile=testng.xml
 
 ---
 
+# Running Security Tests
+
+Navigate to the security tests directory:
+
+```bash
+cd security-tests
+```
+
+Run all security tests:
+
+```bash
+mvn test
+or
+
+mvn test -DsuiteXmlFile=testng.xml
+```
+
+---
+
 # Mobile Test Execution Workflow
 
 1. Start the **Spree Rails server**
@@ -440,6 +499,7 @@ This project demonstrates the implementation of:
 * Selenium automation for critical workflows
 * Parallel test execution
 * CI/CD integration with GitHub Actions
+* Security testing for common web vulnerabilities
 * Structured QA documentation
 
 Together with **manual testing performed in Part 1**, this automation framework provides comprehensive validation of the Spree e-commerce application.
