@@ -33,7 +33,7 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.1'
+        ruby-version: '3.2'
         bundler-cache: true
 
     - name: Install Gems
@@ -68,4 +68,3 @@ jobs:
       run: |
         cd mobile-test
         mvn -B clean test
-        
