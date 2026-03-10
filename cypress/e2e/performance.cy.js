@@ -35,7 +35,6 @@ describe('Performance Tests', () => {
       const resources = win.performance.getEntriesByType('resource')
       cy.log(`Total Resources: ${resources.length}`)
 
-      // Check karo koi resource 2 second se zyada nahi lena chahiye
       const slowResources = resources.filter(r => r.duration > 2000)
       cy.log(`Slow Resources: ${slowResources.length}`)
 

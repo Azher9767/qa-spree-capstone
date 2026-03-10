@@ -15,6 +15,7 @@ The following workflows were automated:
 * Add to cart
 * Multi-step checkout navigation
 * Form submission validation
+* File upload
 
 ---
 

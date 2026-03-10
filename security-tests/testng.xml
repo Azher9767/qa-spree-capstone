@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Spree Security Test Suite" verbose="1">
+
+    <test name="SQL Injection Tests">
+        <classes>
+            <class name="com.spree.security.SQLInjectionTest"/>
+        </classes>
+    </test>
+
+    <test name="XSS Tests">
+        <classes>
+            <class name="com.spree.security.XSSTest"/>
+        </classes>
+    </test>
+
+    <test name="Authentication Security Tests">
+        <classes>
+            <class name="com.spree.security.AuthSecurityTest"/>
+        </classes>
+    </test>
+
+    <test name="Sensitive Data Exposure Tests">
+        <classes>
+            <class name="com.spree.security.SensitiveDataTest"/>
+        </classes>
+    </test>
+
+</suite>

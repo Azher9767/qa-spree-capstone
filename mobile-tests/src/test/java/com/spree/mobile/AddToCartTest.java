@@ -11,10 +11,10 @@ public class AddToCartTest extends BaseTest {
     @Test
     public void userCanAddProductToCart() {
 
-        // 1️⃣ Open specific product page
+        // 1 Open specific product page
         driver.get("http://10.0.2.2:3000/products/digital-download");
 
-        // 2️⃣ Wait for Add to Cart button
+        // 2 Wait for Add to Cart button
         WebElement addToCartButton = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.cssSelector(".add-to-cart-button")
@@ -24,20 +24,20 @@ public class AddToCartTest extends BaseTest {
         Assert.assertTrue(addToCartButton.isDisplayed(), 
                 "Add to Cart button not visible");
 
-        // 3️⃣ Click Add to Cart
+        // 3 Click Add to Cart
         addToCartButton.click();
 
-        // 4️⃣ Navigate to Cart page
+        // 4 Navigate to Cart page
         driver.get("http://10.0.2.2:3000/cart");
 
-        // 5️⃣ Wait for cart page to load
+        // 5 Wait for cart page to load
         WebElement body = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         By.tagName("body")
                 )
         );
 
-        // 6️⃣ Verify cart is NOT empty
+        // 6 Verify cart is NOT empty
         String pageText = body.getText();
 
         Assert.assertFalse(
